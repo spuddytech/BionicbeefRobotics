@@ -3,11 +3,12 @@ import time
 #Authored by Harrison Lisle (spuddytech)
 
 
-motorOnePins = [,]
-motorTwoPins = [,]
-motorThreePins = [,]
+#Constants
+motorOnePins = [31,32]
+motorTwoPins = [35,36]
+motorThreePins = [37,38]
 
-startButton = 0
+startButton = 40
 
 
 if __name__ == "__main__": #Main client of the robot. Currently set up for prototyping.
@@ -19,6 +20,6 @@ if __name__ == "__main__": #Main client of the robot. Currently set up for proto
 
     while True:
         rbt.waitForInput()
-        rbt.testBoard(forceSet, angleSet, waitTime = 1)
+        rbt.testBoard(forceSet, angleSet, testForce = 0.4, waitTime = 0.5)
         rbt.waitForInput()
-        rbt.testBoard(forceSet, angleSet, testForce = 0.5, waitTime = 1)
+        rbt.testBoard(forceSet, angleSet, testForce = 0.5, waitTime = 0.5)

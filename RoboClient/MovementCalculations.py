@@ -21,17 +21,13 @@ def straightLineMovement(angle, speed): #Calculates the ratio of motor speeds to
         motorDutyCycles.append(round(motorForces[i]*(maxDutyCycle/maxAbsForce), 8))
         
     return motorDutyCycles
-
     
-def testCalcs(angle, speed): #Simple test function for the calculations
-    angles = straightLineMovement(angle, speed)
-    print("m1: " + str(angles[0]))
-    print("m2: " + str(angles[1]))
-    print("m3: " + str(angles[2]))
-
 
 if __name__ == "__main__": #Test outputs for the straightLineMovement function
     angle = int(input("Angle: "))
     speed = int(input("Speed: "))
 
-    testCalcs(angle, speed)
+    angles = straightLineMovement(angle, speed)
+    print("m1: " + str(angles[0]))
+    print("m2: " + str(angles[1]))
+    print("m3: " + str(angles[2]))
