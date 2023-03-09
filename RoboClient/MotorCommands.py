@@ -38,7 +38,7 @@ class Motor(): #Class for individual motor
         
         
 class MotorSet(): #Class for the GPIO board, set up with a three motor holonomic movement setup
-    def __init__(self, motorOnePins, motorTwoPins, motorThreePins, startButton, maxFrequency = 8000):
+    def __init__(self, motorOnePins, motorTwoPins, motorThreePins, maxFrequency = 8000):
         GPIO.setmode(GPIO.BOARD)
         
         #Creat motor objects from the given pins
@@ -48,18 +48,11 @@ class MotorSet(): #Class for the GPIO board, set up with a three motor holonomic
 
         self.allMotors = [motorOne, motorTwo, motorThree]
 
-        self.startButton = startButton
-        GPIO.setup(startButton, GPIO.IN)
-
         self.maxFrequency = maxFrequency
         
         #Initialise all motors to be on, in the board, with their PWM set to 0
         for i in range(3):
             self.allMotors[i].motorSetup(maxFrequency)
-
-    def waitForInput(self): #TEMPORARY | Ensure the robot doesnt start movement until a start button has been pressed
-        while GPIO.input(self.startButton) != 1:
-            time.sleep(0.02)
         
     def stop(self): #Stops all motor movement on the board
         for i in range(3):
@@ -69,32 +62,18 @@ class MotorSet(): #Class for the GPIO board, set up with a three motor holonomic
         forces = moveCalc.straightLineMovement(angle, force)
         
         for i in range(3):
-            if forces[i] < 0: 
-                self.allMotors[i].motorBackward(abs(forces[i]))
-            else:
-                self.allMotors[i].motorForward(forces[i])
+            self.allMotors[i].motorForward(forces[i])
 
-    def testBoard(self, forceSet, angleSet, testForce = 1, waitTime = 1): #Testing for all motors and angles of holonomic movement
+    def testBoard(self, forceSet, angleSet, waitTime = 1): #Testing for all motors and angles of holonomic movement
         print("Test Start")
-        time.sleep(3)
-
-        print("Moving Motors")
-        for motor in self.allMotors:
-            for force in forceSet:
-                motor.motorForward(force)
-                time.sleep(waitTime*2)
-                motor.motorStop()
-                time.sleep(waitTime)
-                motor.motorBackward(force)
-                time.sleep(waitTime*2)
-                motor.motorStop()
-                time.sleep(waitTime)
+        time.sleep(2)
 
         print("Moving Board")
-        for angle in angleSet:
-            self.move(angle, testForce)
-            time.sleep(waitTime*2)
-            self.stop()
-            time.sleep(waitTime)
+        for force in forceSet:
+            for angle in angleSet:
+                self.move(angle, force)
+                time.sleep(waitTime*2)
+                self.stop()
+                time.sleep(waitTime)
 
         print("Test End")

@@ -18,7 +18,7 @@ def straightLineMovement(angle, speed): #Calculates the ratio of motor speeds to
     motorDutyCycles = []
     
     for i in range(3):
-        motorDutyCycles.append(round(motorForces[i]*(maxDutyCycle/maxAbsForce), 8))
+        motorDutyCycles.append(abs(round(motorForces[i]*(maxDutyCycle/maxAbsForce), 8)))
         
     return motorDutyCycles
     
