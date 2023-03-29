@@ -20,7 +20,7 @@ class Camera(): #Class for camera usage with openCV
         self.centerROI = (int(self.frameWidth/7*3), 0, int(self.frameWidth/7), int(self.frameHeight))
         self.rightROI = (int(self.frameWidth/7*4), 0, int(self.frameWidth/7*3), int(self.frameHeight))
 
-    def CheckForBall(self): #Checks if a ball is present on the screen
+    def CheckForBall(self): #Checks if a ball is present on the screen, returns amount of balls on screen and stores countours for each
         ret, self.frame = self.cap.read()
         if ret:
             # Convert frame to HSV color space
