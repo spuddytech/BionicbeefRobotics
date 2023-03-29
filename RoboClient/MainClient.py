@@ -27,7 +27,7 @@ def testCamera(cam, srv, rightMovement):
     while ballsOnScreen == -1:
             print("error")
 
-    if ballsOnScreen == 1:
+    if ballsOnScreen >= 1:
         cam.CheckScreenPosition()
         if cam.center or (not cam.center or not cam.left or not cam.right):
             pass
@@ -46,6 +46,8 @@ def testCamera(cam, srv, rightMovement):
                 srv.MoveServo(srv.angle + servoStep)
             else:
                 srv.MoveServo(srv.angle - servoStep)
+    
+    cam.ShowFrame()
 
 
 if __name__ == "__main__": #Main client of the robot. VERY rough testing draft.
