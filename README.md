@@ -9,12 +9,14 @@ The Bionicbeef robot code is run independently on a Raspberry Pi. The robot has 
 
 ## Install Requirements
 Though most libraries used come preinstalled with a Raspberry Pi, to ensure proper installation, requirements should be downloaded with:
-'''bash
+
+```
 pip install -r requirements.txt
-'''
+```
 
 ## Usage
 Run the [client](RoboClient/MainClient.py) script on the Raspberry Pi with:
-'''bash
+
+```
 python3 RoboClient/MainClient.py
-'''
+```
