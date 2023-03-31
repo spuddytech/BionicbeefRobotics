@@ -13,8 +13,9 @@ class Servo(): #Class for defining a servo that can be moved with PWM
         self.pwm = GPIO.PWM(servoPin, 50)
         self.MoveServo(self.angle)
 
-    def AngleToDutyCycle(self): #Calculate needed Duty Cycle for servo movement given an angle
-        dutyCycle = self.angle / 18.0 + 2.5
+    def AngleToDutyCycle(self, angle): #Calculate needed Duty Cycle for servo movement given an angle
+        self.angle = angle
+        dutyCycle = angle / 18.0 + 2.5
         return dutyCycle
 
     def MoveServo(self, angle): #Moves Servo to given angle
@@ -24,9 +25,7 @@ class Servo(): #Class for defining a servo that can be moved with PWM
             angle = 0
         if angle > 180:
             angle = 180
-         
-        self.angle = angle
-
+        
         #Move the servo for a fraction of a second
         dutyCycle = self.angleToDutyCycle(angle)
         self.pwm.ChangeDutyCycle(dutyCycle)
