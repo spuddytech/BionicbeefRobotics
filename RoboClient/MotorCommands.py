@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-import math, time
+import time
 import MovementCalculations as moveCalc
 #Authored by Harrison Lisle (spuddytech)
 
